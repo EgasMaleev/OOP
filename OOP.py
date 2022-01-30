@@ -18,6 +18,7 @@ class Student:
                 lecrute.grades[course] = [grade]
         else:
             return 'Ошибка'
+
     def __str__(self):
         i = 0
         sum = 0
@@ -31,10 +32,30 @@ class Student:
             fin_course += value
         for value in self.courses_in_progress:
             progress_course += value
-        res = f' Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за домашние задания: {sum/i}\n'
+        res = f' Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за домашние задания: {sum / i}\n'
         res += f' Курсы в процессе изучения: {progress_course}\n Завершенные курсы: {fin_course}'
         return res
 
+    def __lt__(self, student2):
+        print(self.name)
+        i = 0
+        sum = 0
+        for value in self.grades.values():
+            for k in value:
+                sum += k
+                i += 1
+        middle1 = sum / i
+
+        i = 0
+        sum = 0
+        for value in student2.grades.values():
+            for k in value:
+                sum += k
+                i += 1
+        middle2 = sum / i
+        print(middle1)
+        print(middle2)
+        return (middle1 > middle2)
 
 
 class Mentor:
@@ -42,7 +63,6 @@ class Mentor:
         self.name = name
         self.surname = surname
         self.courses_attached = []
-
 
 
 class Reviewer(Mentor):
@@ -54,6 +74,7 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
+
     def __str__(self):
         res = f'Имя: {self.name}\n'
         res += f'Фамилия: {self.surname}'
@@ -65,6 +86,7 @@ class Lecrute(Mentor):
         super().__init__(name, username)
         self.grades = {}
         self.courses_attached = []
+
     def __str__(self):
         i = 0
         sum = 0
@@ -72,14 +94,39 @@ class Lecrute(Mentor):
             for k in value:
                 sum += k
                 i += 1
-        res = f' Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за лекции: {sum/i}'
+        res = f' Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за лекции: {sum / i}'
         return res
+
+    def __lt__(self, lecrute2):
+        print(self.name)
+        i = 0
+        sum = 0
+        for value in self.grades.values():
+            for k in value:
+                sum += k
+                i += 1
+        middle1 = sum / i
+
+        i = 0
+        sum = 0
+        for value in lecrute2.grades.values():
+            for k in value:
+                sum += k
+                i += 1
+        middle2 = sum / i
+        print(middle1)
+        print(middle2)
+        return (middle1 > middle2)
+
 
 best_lecrute = Lecrute('Petr', 'Ivanov')
 best_lecrute.courses_attached += ['Python']
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
+
+best_student2 = Student('Tim', 'Filby', 'man')
+best_student2.courses_in_progress += ['Python']
 
 cool_mentor = Reviewer('Some', 'Buddy')
 cool_mentor.courses_attached += ['Python']
@@ -88,12 +135,19 @@ cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 cool_mentor.rate_hw(best_student, 'Python', 10)
 
+cool_mentor.rate_hw(best_student2, 'Python', 9)
+cool_mentor.rate_hw(best_student2, 'Python', 9)
+cool_mentor.rate_hw(best_student2, 'Python', 9)
+
 best_student.rate_lecrute(best_lecrute, 'Python', 10)
 best_student.rate_lecrute(best_lecrute, 'Python', 9)
 best_student.rate_lecrute(best_lecrute, 'Python', 8)
+
 print(best_student.grades)
 print(best_lecrute.grades)
 
 print(cool_mentor)
 print(best_lecrute)
 print(best_student)
+print(best_student2)
+print(best_student > best_student2)
