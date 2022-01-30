@@ -12,12 +12,29 @@ class Student:
 
     def rate_lecrute(self, lecrute, course, grade):
         if isinstance(lecrute, Lecrute):
-            if course in lecrute.grades:
+            if course in lecrute.grades and course in self.courses_in_progress and course in lecrute.courses_attached:
                 lecrute.grades[course] += [grade]
             else:
                 lecrute.grades[course] = [grade]
         else:
             return 'Ошибка'
+    def __str__(self):
+        i = 0
+        sum = 0
+        fin_course = ''
+        progress_course = ''
+        for value in self.grades.values():
+            for k in value:
+                sum += k
+                i += 1
+        for value in self.finished_courses:
+            fin_course += value
+        for value in self.courses_in_progress:
+            progress_course += value
+        res = f' Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за домашние задания: {sum/i}\n'
+        res += f' Курсы в процессе изучения: {progress_course}\n Завершенные курсы: {fin_course}'
+        return res
+
 
 
 class Mentor:
@@ -25,7 +42,7 @@ class Mentor:
         self.name = name
         self.surname = surname
         self.courses_attached = []
-        self.grades = {}
+
 
 
 class Reviewer(Mentor):
@@ -37,13 +54,29 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
+    def __str__(self):
+        res = f'Имя: {self.name}\n'
+        res += f'Фамилия: {self.surname}'
+        return res
 
 
 class Lecrute(Mentor):
-    pass
-
+    def __init__(self, name, username):
+        super().__init__(name, username)
+        self.grades = {}
+        self.courses_attached = []
+    def __str__(self):
+        i = 0
+        sum = 0
+        for value in self.grades.values():
+            for k in value:
+                sum += k
+                i += 1
+        res = f' Имя: {self.name}\n Фамилия: {self.surname}\n Средняя оценка за лекции: {sum/i}'
+        return res
 
 best_lecrute = Lecrute('Petr', 'Ivanov')
+best_lecrute.courses_attached += ['Python']
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
@@ -60,3 +93,7 @@ best_student.rate_lecrute(best_lecrute, 'Python', 9)
 best_student.rate_lecrute(best_lecrute, 'Python', 8)
 print(best_student.grades)
 print(best_lecrute.grades)
+
+print(cool_mentor)
+print(best_lecrute)
+print(best_student)
