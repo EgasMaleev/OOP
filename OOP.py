@@ -37,7 +37,6 @@ class Student:
         return res
 
     def __lt__(self, student2):
-        print(self.name)
         i = 0
         sum = 0
         for value in self.grades.values():
@@ -53,8 +52,6 @@ class Student:
                 sum += k
                 i += 1
         middle2 = sum / i
-        print(middle1)
-        print(middle2)
         return (middle1 > middle2)
 
 
@@ -98,7 +95,6 @@ class Lecrute(Mentor):
         return res
 
     def __lt__(self, lecrute2):
-        print(self.name)
         i = 0
         sum = 0
         for value in self.grades.values():
@@ -114,8 +110,6 @@ class Lecrute(Mentor):
                 sum += k
                 i += 1
         middle2 = sum / i
-        print(middle1)
-        print(middle2)
         return (middle1 > middle2)
 
 
