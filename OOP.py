@@ -110,11 +110,14 @@ class Lecrute(Mentor):
                 sum += k
                 i += 1
         middle2 = sum / i
-        return (middle1 > middle2)
+        return (middle1 < middle2)
 
 
 best_lecrute = Lecrute('Petr', 'Ivanov')
 best_lecrute.courses_attached += ['Python']
+
+best_lecrute2 = Lecrute('Ivan', 'Petrov')
+best_lecrute2.courses_attached += ['Python']
 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
@@ -137,6 +140,10 @@ best_student.rate_lecrute(best_lecrute, 'Python', 10)
 best_student.rate_lecrute(best_lecrute, 'Python', 9)
 best_student.rate_lecrute(best_lecrute, 'Python', 8)
 
+best_student.rate_lecrute(best_lecrute2, 'Python', 10)
+best_student.rate_lecrute(best_lecrute2, 'Python', 9)
+best_student.rate_lecrute(best_lecrute2, 'Python', 10)
+
 print(best_student.grades)
 print(best_lecrute.grades)
 
@@ -145,3 +152,4 @@ print(best_lecrute)
 print(best_student)
 print(best_student2)
 print(best_student < best_student2)
+print(best_lecrute < best_lecrute2)
