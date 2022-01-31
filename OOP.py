@@ -153,3 +153,21 @@ print(best_student)
 print(best_student2)
 print(best_student < best_student2)
 print(best_lecrute < best_lecrute2)
+
+
+def middle_grade(spisok, kyrs):
+    for student in spisok:
+        if isinstance(student, Student):
+            sum = 0
+            i = 0
+            for value in student.grades.values():
+                for k in value:
+                    sum += k
+                    i += 1
+                print(f'Средний балл студента {student.name} {student.surname} равен {sum / i}')
+
+        else:
+            print('Ошибка')
+
+
+middle_grade([best_student, best_student2], 'Python')
