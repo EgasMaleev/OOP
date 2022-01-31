@@ -170,4 +170,18 @@ def middle_grade(spisok, kyrs):
             print('Ошибка')
 
 
+def middle_grade_lecrute(spisok, kyrs):
+    for lecrute in spisok:
+        if isinstance(lecrute, Lecrute):
+            sum = 0
+            i = 0
+            for value in lecrute.grades.values():
+                for k in value:
+                    sum += k
+                    i += 1
+                print(f'Средний балл лектора {lecrute.name} {lecrute.surname} равен {sum / i}')
+        else:
+            print('Ошибка')
+            
 middle_grade([best_student, best_student2], 'Python')
+middle_grade_lecrute([best_lecrute, best_lecrute2], 'Python')
