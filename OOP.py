@@ -52,7 +52,7 @@ class Student:
                 sum += k
                 i += 1
         middle2 = sum / i
-        return (middle1 > middle2)
+        return (middle1 < middle2)
 
 
 class Mentor:
@@ -144,4 +144,4 @@ print(cool_mentor)
 print(best_lecrute)
 print(best_student)
 print(best_student2)
-print(best_student > best_student2)
+print(best_student < best_student2)
